@@ -1,0 +1,134 @@
+﻿body {
+}
+
+@media (max-width: 575px) {        
+    #RemarksText{
+        height: 5em;
+    }
+
+    #SignatureButtonContainer {
+        display: none;
+    }
+
+    #SignatureIButtonContainer{
+        display: none;
+    }
+
+    #SignatureButtonContainer1 {
+        display: none;
+    }
+
+    #SignatureIButtonContainer1 {
+        display: none;
+    }
+
+    canvas {
+        height: 150px
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #RemarksText {
+        height: 7em;
+    }
+
+    #SignatureButtonContainer {
+        display: none;
+    }
+
+    #SignatureButtonContainer1 {
+        display: none;
+    }
+
+    canvas {
+        height: 200px
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {   
+    #SignatureButtonContainer {
+        display: none;
+    }
+
+    #SignatureButtonContainer1 {
+        display: none;
+    }
+
+    #RemarksText {
+        height: 10em;
+    }
+
+    canvas{
+        height: 150px
+    }
+}
+
+@media (min-width: 992px) {    
+    #SignatureIButtonContainer {
+        display: none;
+    }
+
+    #SignatureIButtonContainer1 {
+        display: none;
+    }
+
+    #CustomerSignature{
+        height: 100px;
+        width: 50% !important
+    }
+
+    #DriverSignature {
+        height: 100px;
+        width: 50% !important
+    }
+
+    #RemarksText{
+        height: 10em;
+    }
+
+    canvas{
+        height: 150px;
+    }
+}
+
+#RemarksText, #CustomerSignature, #CustomerName, #IDTB {
+    width: 100%;
+    resize: none;
+}
+
+.ForISignatureClearBtn {
+    background-color: none;
+    border: none;
+    background: none;
+    color: #6D6E72;
+    font-size: 18px;
+}
+
+.ForSignatureClearBtn {
+    display: inline-block;
+    background-color: #409B3C;
+    color: white;
+    border-radius: 2em;
+    border: none;
+    width: 150px;
+    padding: .3em;
+}
+
+canvas {
+    width: 100%;    
+    border: .1em solid;    
+    border-color: lightgrey;    
+}
+
+#SignatureButtonContainer{    
+    transform: translateY(50%);
+}
+
+#SignatureButtonContainer1 {
+    transform: translateY(50%);
+}
+
+.error{
+    border-color: red;
+    border-collapse: collapse;
+}

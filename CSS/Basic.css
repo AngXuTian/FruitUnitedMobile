@@ -1,0 +1,81 @@
+﻿.dropdown-mobile {
+    font-size: 16px !important;
+    padding: 10px; /* More space for fingers */
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+    /* Optional: make the dropdown arrow visible across browsers */
+    .dropdown-mobile::-ms-expand {
+        display: none; /* Remove default arrow in IE */
+    }
+
+select.dropdown-mobile {
+    display: block;
+}
+
+.parent {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center; /* vertical */
+}
+
+.FilterTextBox {
+    margin-bottom:5px;
+}
+
+html {
+    font-size: 19px;
+}
+
+/* Mobile (small screens) */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px; /* slightly smaller for small screens */
+    }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.TitleDiv {
+    margin:10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 95%;
+}
+
+
+@media (max-width: 479px) {
+    .TitleLabel {
+        min-width: 100px;
+        max-width: 100px;
+        width: 100px
+    }
+}
+
+@media (min-width: 480px) {
+    .TitleLabel {
+        min-width: 140px;
+        max-width: 140px;
+        width: 140px
+    }
+}
+
+.table-Knowledge-Base {
+    height:35vh;
+}
+
+
+.select2-disabled-style .select2-selection {
+    background-color: #e9ecef !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}

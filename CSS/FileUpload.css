@@ -1,0 +1,26 @@
+﻿body {
+}
+
+@media (max-width: 575px) {
+    #Remarks {
+        height: 4em
+    }   
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #FileUploadInfo {
+        margin-top: 3em;
+    }        
+    
+}
+
+@media (min-width: 992px) {
+}
+
+#Remarks, #DeliveryMode, #VechicleNo {
+    width: 100%;
+    resize: none;
+}

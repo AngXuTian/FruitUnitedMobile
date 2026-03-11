@@ -1,0 +1,136 @@
+﻿body {
+}
+
+#CompanyName {
+    font-family: Inter,sans-serif;
+    font-weight:700;
+}
+.logoutBtn {
+    border: none;
+    background-color: none;
+    background: none;
+    color: #6D6E72;
+    /*text-align: right;*/
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+@media (max-width: 575px ) {        
+    img {
+        width: 250px;
+        height: 50px;
+    }
+
+    .CompanyLogo {
+        height: 20px;
+        width: 90px;
+    }
+
+    #CompanyName {
+        font-size: 30px;
+    }
+
+    .logoutBtn {
+        font-size: 25px;
+        /*transform: translateY(-180%)*/
+    }
+
+    #SignOut{
+        transform: translateY(-160%) translateX(-30%)
+    }
+}
+
+@media (min-width: 576px ) and (max-width: 767px) {
+
+    .CompanyLogo {
+        height: 20px;
+        width: 90px;
+    }
+
+    img {
+        width: 280px;
+        height: 80px;
+        
+    }
+
+    #CompanyName {
+        font-size: 35px;
+    }
+
+    #MenuName {
+        font-size: 35px;
+    }
+
+    .logoutBtn {
+        font-size: 30px;
+        right:5px!important;
+    }
+
+    #SignOut {
+        transform: translateY(20%)
+    }
+}
+
+@media (min-width: 768px ) and (max-width: 991px) {
+
+    .CompanyLogo {
+        height: 30px;
+        width: 135px;
+    }
+
+    img {
+        width: 300px;
+        height: 80px;
+        
+    }
+
+    #CompanyName {
+        font-size: 40px;
+    }
+
+    #MenuName {
+        font-size: 40px;
+        right: 5px !important;
+    }
+
+    .logoutBtn {
+        font-size: 40px;
+    }
+
+    #SignOut {
+        transform: translateY(0%)
+    }
+}
+
+@media (min-width: 992px ) 
+{
+    .CompanyLogo {
+        height: 40px;
+        width: 180px;
+    }
+
+    img {
+        height: 150px;
+        width: 350px;
+        
+    }
+
+    #CompanyName {
+        font-size: 40px;
+    }
+
+    #MenuName {
+        font-size: 40px;
+    }
+
+    .logoutBtn {
+        font-size: 62px;
+        right: 5px !important;
+    }
+
+    #SignOut {
+        transform: translateY(-30%) 
+    }
+}

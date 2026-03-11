@@ -1,0 +1,51 @@
+﻿body {
+}
+
+@media (max-width: 575px) {
+    #ViewPDFBtnDiv {
+        display: none
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #ViewPDFBtnDiv{
+        display: none;
+    }
+
+    #FileUploadInfo {
+        /*margin-top: 1.5em;*/
+    }   
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #ViewPDFBtnDiv {
+        display: none;
+    }
+
+    #FileUploadInfo {
+        /*margin-top: 1.5em;*/
+    }     
+}
+
+@media (min-width: 992px) {
+    #HTMLViewPDFBtnDiv{
+        display: none
+    }
+}
+
+#HTMLPrintBtn{
+    background: none;
+    border: none;
+    background-color: none;
+}
+
+
+#PreviewIFrame{
+    /*margin-top: 10px;*/
+}
+
+iframe {
+    /*border: 1px solid black;*/
+    width: 100%;
+    margin-top: 10px;    
+}
