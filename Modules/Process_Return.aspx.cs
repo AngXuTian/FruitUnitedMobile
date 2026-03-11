@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Process_Return : System.Web.UI.Page
+    public partial class Process_Return : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

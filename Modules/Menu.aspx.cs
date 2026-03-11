@@ -25,7 +25,7 @@ using FruitUnitedMobile.ClearSessionHelper;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Menu : System.Web.UI.Page
+    public partial class Menu : BasePage
     {
         Connection con = new Connection();
         protected void Page_Load(object sender, EventArgs e)

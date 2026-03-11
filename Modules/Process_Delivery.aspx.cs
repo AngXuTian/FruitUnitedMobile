@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Process_Delivery : System.Web.UI.Page
+    public partial class Process_Delivery : BasePage
     {
         public class StockIssue
         {

@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class LoadVehicle : System.Web.UI.Page
+    public partial class LoadVehicle : BasePage
     {
         private int vehicleProfileID = 0;
         private int driver1ID = 0;

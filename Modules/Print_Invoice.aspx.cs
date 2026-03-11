@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Print_Invoice : System.Web.UI.Page
+    public partial class Print_Invoice : BasePage
     {
         private readonly string _connStr = ConfigurationManager.ConnectionStrings["FruitUnited"].ConnectionString;
 
