@@ -1,0 +1,196 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ModulesPage.master.cs" Inherits="FruitUnitedMobile.ModulesPage" %>
+<%@ Register Src="~/Component/Toast.ascx" TagPrefix="uc" TagName="Toast" %>
+
+<!DOCTYPE html>
+<style>
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table th, .table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Make first row of the header sticky */
+        .table tr:nth-child(1) th {
+            font-size: small;
+            position: sticky;
+            top: 0; /* First row stays at the very top */
+            z-index: 0;
+            background-color: #343a40; /* Dark grey */
+            color: #ffffff; /* White text */
+        }
+
+        .table tr:nth-child(2) th {
+            font-size: small;
+        }
+        /* Add hover effect for table rows */
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .CompanyLogoDIV {
+        text-align: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .MenuLogoDiv {
+        padding-right: 50px;
+        text-align: end;
+    }
+
+    #DefaultHeader {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    #CurrentEmployeeName {
+        font-size: 12px;
+        height: 100%;
+        text-align: right;
+        padding-right: 5px;
+        color: black;
+    }
+
+    @media (max-width: 768px) {
+        #CurrentEmployeeName {
+            height: 100%;
+            font-size: 14px;
+            text-align: right;
+            padding-right: 5px;
+            color: black;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #CurrentEmployeeName {
+            height: 100%;
+            font-size: 12px;
+            text-align: right;
+            padding-right: 5px;
+            color: black;
+        }
+    }
+
+    .header {
+        position: sticky; /* stays at the top during scroll */
+        top: 0;
+        background-color: #f5f5f5;
+        color: white;
+        padding: 10px 20px;
+        z-index: 1000;
+    }
+
+    /* Content - takes remaining space and scrolls */
+    .content {
+        overflow-y: auto;
+        background: white;
+        padding: 0px 0px 0px;
+    }
+
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    #loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+        z-index: 9999;
+        display: none; /* hidden by default */
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Spinner style */
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 8px solid #ccc;
+        border-top: 8px solid #333;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    /* Animation */
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="CSS/ModuleMaster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="<%= ResolveUrl("~/CSS/Basic.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/CSS/ButtonFooter.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/CSS/SearchFix.css") %>" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <div id="loader-overlay">
+            <div class="spinner">
+            </div>
+        </div>
+        <div>
+            <div id="ModuleHeader" class="header" style="overflow-x: hidden;">
+                <div class="row" id="HeaderColour" runat="server">
+                    <div class="col-4 CompanyLogoDIV">
+                        <asp:HyperLink runat="server" NavigateUrl="~/Modules/Menu.aspx">
+                            <asp:Image runat="server" ImageUrl="Images/FRUITUNITED.jpg" CssClass="CompanyLogo"/>
+                        </asp:HyperLink>
+                    </div>
+                    <div class="col-8 MenuLogoDiv">
+                        <div class="text-end ms-auto">
+                            <asp:Label ID="CurrentEmployeeName" runat="server" ForeColor="Black" Font-Bold="true" />
+                            <asp:HyperLink runat="server" NavigateUrl="~/Modules/Menu.aspx" class="logoutBtn" Style="margin-right: 10px; text-decoration: none;">
+                                <i class="fa fa-home"></i>
+                            </asp:HyperLink>
+                            <%--<asp:HyperLink ID="UserButton" runat="server" NavigateUrl="~/Modules/User-Password.aspx" class="logoutBtn" ToolTip="<>" Style="margin-right: 10px; text-decoration: none;">
+                                <i class="fa fa-user"></i>
+                            </asp:HyperLink>--%>
+                            <a class="logoutBtn" id="LogoutBtn" href="../Logout.aspx" style="text-decoration: none; margin-right: 15px;">
+                                <i class="fa fa-sign-out"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%-- Session Part %> --%>
+                   <%-- <div style="background:#f0f0f0; padding:10px; margin:10px; border:1px solid #ccc; font-family:Consolas, monospace; font-size:12px; max-height:400px; overflow:auto;">
+            <strong>Current Session Data:</strong><br />
+            <pre><asp:Literal ID="litSessionData" runat="server" /></pre>
+        </div>--%>
+            <div class="content fade-in">
+                <uc:Toast ID="Toast1" runat="server" />
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

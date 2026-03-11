@@ -1,0 +1,155 @@
+﻿body {
+}
+
+@media (max-width: 575px) {
+    #MainDiv {
+        transform: translateY(30%);
+    }
+
+        #MainDiv input[type=text], #MainDiv input[type=password] {
+            border: none;
+            border-bottom: .1em solid white;
+            font-size: 16px;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+
+        #MainDiv .material-icons {
+            font-size: 18px;
+        }
+
+        #MainDiv input[type=button] {
+            font-size: 18px;
+        }
+
+    .ErrFontSize {
+        font-size: 16px;
+    }
+
+    .ForLoginBtn {
+        font-size: 16px;
+        height: 40px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    #MainDiv {
+        transform: translateY(50%);
+    }
+
+        #MainDiv input[type=text], #MainDiv input[type=password] {
+            border: none;
+            border-bottom: .1em solid white;
+            font-size: 16px;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+
+        #MainDiv .material-icons {
+            font-size: 16px;
+        }
+
+        #MainDiv input[type=button] {
+            font-size: 30px;
+        }
+
+    .ErrFontSize {
+        font-size: 18px;
+    }
+
+    .ForLoginBtn {
+        font-size: 18px;
+        height: 42px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #MainDiv {
+        transform: translateY(50%);
+    }
+
+        #MainDiv input[type=text], #MainDiv input[type=password] {
+            border: none;
+            border-bottom: .01em solid white;
+            font-size: 20px;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+
+        #MainDiv .material-icons {
+            font-size: 48px;
+        }
+
+        #MainDiv input[type=button] {
+            font-size: 40px;
+        }
+
+    .ErrFontSize {
+        font-size: 24px;
+    }
+
+    .ForLoginBtn {
+        font-size: 24px;
+        height: 48px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    #MainDiv {
+        transform: translateY(15%);
+        height: 350px;
+    }
+
+        #MainDiv input[type=text], #MainDiv input[type=password],
+        #MainDiv .material-icons {
+            font-size: 24px;
+        }
+
+    .ErrFontSize {
+        font-size: 26px;
+    }
+
+    .ForLoginBtn {
+        font-size: 24px;
+        height: 48px;
+    }
+}
+
+#MainDiv {
+    border: .1em solid white;
+    border-radius: 2em;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3em;
+}
+
+    #MainDiv input[type=button] {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding-left: 2em;
+        padding-right: 2em;
+        padding-top: .5em;
+        padding-bottom: .5em;
+        border-radius: 3em;
+        background-color: #409B3C;
+        color: white;
+        border: none;
+    }
+
+.ForLoginBtn {
+    border-radius: 3px;
+    background-color: #fff;
+    color:black;
+    background-image: linear-gradient(#f7f8fa,#e7e9ec);
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+}
+
+#MainDiv input[type=text], #MainDiv input[type=password] {
+    border: none;
+    border-bottom: .01em solid black;
+    margin-bottom: .5em;
+    margin-top: .5em;
+}

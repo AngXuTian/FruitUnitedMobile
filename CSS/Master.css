@@ -1,0 +1,87 @@
+﻿body {
+}
+
+.logoutBtn {
+    border: none;
+    background-color: none;
+    background: none;
+    color: #6D6E72;
+    margin: .6em;
+    /*text-align: right;*/
+}
+
+#CompanyName {
+    font-family: Inter,sans-serif;
+    font-weight: 700;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+@media (max-width: 575px ) {        
+    img {
+        width: 320px;
+        height: 80px;
+        transform: translate(0%, 80%)        
+    }
+    #CompanyName {
+        font-size: 30px;
+    }
+
+    .logoutBtn {
+        font-size: 32px;
+    }
+}
+
+@media screen and (min-width: 576px ) and (max-width: 767px) {
+    img {
+        width: 300px;
+        height: 70px;
+        transform: translateY(70%)
+    }
+
+    #CompanyName {
+        font-size: 30px;
+    }
+
+    .logoutBtn {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 768px ) and (max-width: 991px) {
+    img {
+        width: 800px;
+        height: 120px;
+        transform: translate(0%,150%)
+    }
+
+    #CompanyName {
+        font-size: 40px;
+    }
+
+    .logoutBtn {
+        font-size: 32px;
+    }
+}
+
+@media (min-width: 992px ) {
+    img {
+        height: 150px;
+        width: 350px;
+        transform: translateY(0)
+    }
+
+    #CompanyName {
+        font-size: 40px;
+    }
+
+    .logoutBtn {
+        font-size: 62px;
+    }
+}
+
+.Company_Logo {
+    object-fit: cover;
+}
