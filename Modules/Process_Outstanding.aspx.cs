@@ -12,7 +12,7 @@ using DBConnection;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Process_Outstanding : Page
+    public partial class Process_Outstanding : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

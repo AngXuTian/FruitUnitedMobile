@@ -8,7 +8,7 @@ using DBConnection;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Delivery_Plan_Detail : System.Web.UI.Page
+    public partial class Delivery_Plan_Detail : BasePage
     {
         Connection con = new Connection();
 

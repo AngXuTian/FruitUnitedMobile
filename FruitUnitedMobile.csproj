@@ -290,6 +290,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\MobileCheck.cs" />
+    <Compile Include="App_Code\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="App_Code\ClearSession.cs" />
     <Compile Include="App_Code\Connection.cs" />
     <Compile Include="App_Code\Common_Function.cs" />

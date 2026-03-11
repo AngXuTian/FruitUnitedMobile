@@ -11,7 +11,7 @@ using FruitUnitedMobile.ClearSessionHelper;
 
 namespace FruitUnitedMobile.Modules
 {
-    public partial class Review_Invoice : System.Web.UI.Page
+    public partial class Review_Invoice : BasePage
     {
         protected string ChargeableItemsHtml = "";
         protected string ExchangeItemsHtml = "";
