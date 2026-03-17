@@ -12,21 +12,25 @@
        CENTRAL CONTROLS – CHANGE THESE ONLY!
     ───────────────────────────────────────────────── */
     .invoice-box {
-        /* Font family – change here to apply everywhere */
-        /*--ff-main: "Times New Roman", Times, serif;*/
         --ff-main: Arial, sans-serif;
-        /* --ff-main: "Courier New", Courier, monospace; */  /* ← uncomment if you want monospace back */
-
-        /* Font sizes */
-        --fs-base:      8px;      /* items, descriptions, qty, prices, amounts, SKU, totals, good-condition, footer, signature text, etc. */
-        --fs-small:     8px;    /* separator lines, very small notes */
-        --fs-company:   8px;      /* company address, phone, registration no., details */
-        --fs-header:    8px;    /* invoice header (no/date/outlet), section titles */
-        --fs-name:      8px;    /* company name – usually largest */
-
-        /* Line heights */
-        --lh-base:      1.25;
-        --lh-tight:     1.15;
+        
+        /* CLAMP ensures font stays between 8px and 14px [cite: 3, 4, 7] */
+        --fs-base:    clamp(8px, 4vw, 13px); 
+        --fs-company: clamp(7px, 4vw, 13px);
+        --fs-header:  clamp(9px, 4vw, 15px);
+        --fs-name:    clamp(10px, 5vw, 18px);
+        
+        --lh-base: 1.25; [cite: 8]
+        
+        width: 100% !important; [cite: 14]
+        max-width: 100%; [cite: 15]
+        margin: 0; [cite: 16]
+        padding: 1.5mm 1mm; [cite: 17]
+        color: #000;
+        background: #fff;
+        font-size: var(--fs-base);
+        line-height: var(--lh-base);
+        box-sizing: border-box; [cite: 17]
     }
 
     /* Apply main font family + basic reset */
@@ -42,7 +46,7 @@
         padding: 0;
     }
 
-    .invoice-box {
+    /*.invoice-box {
         width: 48mm;
         max-width: 48mm;
         margin: 0 auto;
@@ -52,7 +56,15 @@
         font-size: var(--fs-base);
         line-height: var(--lh-base);
         box-sizing: border-box;
-    }
+    }*/
+
+    .invoice-box {
+    width: 100%;           /* Change from 48mm to 100% [cite: 12] */
+    max-width: 100%;      /* Ensure it fills the available width [cite: 12] */
+    margin: 0;            /* Remove auto margins for thermal printing [cite: 12] */
+    padding: 1.2mm 1mm;
+    box-sizing: border-box; /* Keeps padding inside the width calculation  */
+}
 
     .logo-container { text-align: center; margin-bottom: 5px; }
     .logo { max-width: 70px; height: 70px; }
@@ -217,21 +229,27 @@
         page-break-after: auto !important;
     }
 
+    .auto-scale {
+    display: inline-block;
+    white-space: nowrap;      /* Prevents text from wrapping to a new line */
+    transform-origin: left;   /* Keeps text aligned to the left while shrinking */
+    width: 100%;
+}
+
     /* PRINT OPTIMIZATION */
     @media print {
-        @page { size: 48mm auto; margin: 0; }
+    @page { 
+        size: auto;        /* Let the printer driver define the width  */
+        margin: 0; 
+    }
 
         body { margin: 0; padding: 0; overflow: hidden; }
 
         #ModuleHeader, .no-print, .button-footer { display: none !important; }
 
         .invoice-box {
-            width: 48mm !important;
-            padding: 1mm 0.8mm !important;
-            margin: 0 !important;
-            font-size: var(--fs-base) !important;
-            line-height: var(--lh-base) !important;
-        }
+        width: 100% !important; /* Force full width on print [cite: 59] */
+    }
 
         .logo { max-width: 70px; height: 70px; }
 
@@ -360,6 +378,12 @@
         font-family: var(--ff-main) !important;
         background: #fff !important;
     }
+
+    .autoscale {
+    display: inline-block;
+    white-space: nowrap;
+    transform-origin: left center; /* Scales from the left */
+}
 </style>
     
     <script type="text/javascript">
@@ -414,9 +438,15 @@
                     logging: false
                 },
 
+                //jsPDF: {
+                //    unit: 'mm',
+                //    format: [58, 297],  // fixed width 58mm, height 297mm (adjust if needed, e.g., 200 or 400 for shorter/taller pages)
+                //    orientation: 'portrait'
+                //},
+
                 jsPDF: {
                     unit: 'mm',
-                    format: [58, 297],  // fixed width 58mm, height 297mm (adjust if needed, e.g., 200 or 400 for shorter/taller pages)
+                    format: 'a4', // Or use [80, 297] for standard 80mm thermal rolls
                     orientation: 'portrait'
                 },
 

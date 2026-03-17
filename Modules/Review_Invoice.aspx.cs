@@ -444,12 +444,14 @@ namespace FruitUnitedMobile.Modules
                                 string itemType = isOutstanding ? "Outstanding" : "Exchange";
                                 string status = isOutstanding ? "Outstanding" : "Completed";
                                 decimal balance = isOutstanding ? qty : 0m;
-                                bool offset = !isOutstanding;
+                                bool offset = false;
+
+                                int offsetValue = 0;
 
                                 int itemId = InvoiceIssue.InsertInvoiceItem(con, trans,
                                     invoiceId, productId, qty, 0, 0,
                                     itemType, status, balance,
-                                    offset ? 1 : (int?)null,
+                                    offsetValue,
                                     reasonId,
                                     !isOutstanding ? productId : (int?)null,
                                     !isOutstanding ? qty : (decimal?)null);
@@ -461,6 +463,8 @@ namespace FruitUnitedMobile.Modules
                                 else
                                 {
                                     InvoiceIssue.InsertIntoLoadingMovement(itemId, userId, con, trans);
+
+                                    // is it this one when it exchange then need to have this?
                                     if (offset)
                                     {
                                         InvoiceIssue.DeductOffsetOutstandingDelivery(itemId, userId, con, trans);

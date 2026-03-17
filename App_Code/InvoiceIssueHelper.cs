@@ -127,7 +127,7 @@ namespace FruitUnitedMobile.InvoiceIssueHelper
             string itemType,
             string status,
             decimal balance,
-            int? offsetOutstanding = null,
+			int? offsetOutstanding = 0,
             int? exchangeReasonId = null,
             int? productProfileId1 = null,
             decimal? replacementQuantity = null)
@@ -660,5 +660,6 @@ INSERT INTO Product_Movement
                 cmd.ExecuteNonQuery();
             }
         }
-    }
+
+	}
 }

@@ -200,15 +200,18 @@
 
         <script src="<%= ResolveUrl("~/JS/UL.js") %>" type="text/javascript"></script>
         <script type="text/javascript">
-            // 1. Handle Standard Postbacks (Button clicks)
-            document.getElementById('form1').onsubmit = function () {
-                if (typeof showFruitLoader === "function") {
-                    showFruitLoader();
-                }
-            };
+            // 1. Standard Form Submission Trigger [cite: 73]
+            var masterForm = document.getElementById('form1');
+            if (masterForm) {
+                masterForm.onsubmit = function () {
+                    if (typeof showFruitLoader === "function") {
+                        showFruitLoader();
+                    }
+                };
+            }
 
-            // 2. Handle AJAX UpdatePanel Requests [cite: 39]
-            if (typeof (Sys) !== 'undefined') {
+            // 2. Trigger for ASP.NET AJAX UpdatePanels [cite: 74]
+            if (typeof (Sys) !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
                 var prm = Sys.WebForms.PageRequestManager.getInstance();
                 prm.add_beginRequest(function () {
                     if (typeof showFruitLoader === "function") showFruitLoader();
@@ -218,14 +221,17 @@
                 });
             }
 
-            // 3. Prevent loader from getting stuck on "Back" button [cite: 42]
+            // 3. Fix for Browser "Back" button [cite: 76, 77]
             window.onpageshow = function (event) {
                 if (event.persisted) {
-                    const overlay = document.getElementById('FruitLoaderPanel');
-                    if (overlay) overlay.style.display = 'none';
+                    var overlay = document.getElementById('FruitLoaderPanel');
+                    if (overlay) {
+                        overlay.classList.remove('is-active');
+                        overlay.style.display = 'none'; // Force hide on back navigation
+                    }
                 }
             };
-        </script>
+</script>
     </form>
 </body>
 </html>

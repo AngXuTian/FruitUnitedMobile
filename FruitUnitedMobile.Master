@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FruitUnitedMobile.Master.cs" Inherits="FruitUnitedMobile.FruitUnited" %>
 <%@ Register Src="~/Component/Toast.ascx" TagPrefix="uc" TagName="Toast" %>
+<%@ Register Src="~/Component/FruitLoader.ascx" TagPrefix="uc" TagName="FruitLoader" %>
 
 <!DOCTYPE html>
 <style>
@@ -29,6 +30,7 @@
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
+        <uc:FruitLoader runat="server" ID="ctrlFruitLoader" />
         <div>
             <div id="DefaultHeader" runat="server">
                 <div class="row" id="HeaderColour" runat="server">
@@ -59,6 +61,40 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <script type="text/javascript">
+            // 1. Standard Form Submission Trigger [cite: 73]
+            var masterForm = document.getElementById('form1');
+            if (masterForm) {
+                masterForm.onsubmit = function () {
+                    if (typeof showFruitLoader === "function") {
+                        showFruitLoader();
+                    }
+                };
+            }
+
+            // 2. Trigger for ASP.NET AJAX UpdatePanels [cite: 74]
+            if (typeof (Sys) !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+                prm.add_beginRequest(function () {
+                    if (typeof showFruitLoader === "function") showFruitLoader();
+                });
+                prm.add_endRequest(function () {
+                    if (typeof hideFruitLoader === "function") hideFruitLoader();
+                });
+            }
+
+            // 3. Fix for Browser "Back" button [cite: 76, 77]
+            window.onpageshow = function (event) {
+                if (event.persisted) {
+                    var overlay = document.getElementById('FruitLoaderPanel');
+                    if (overlay) {
+                        overlay.classList.remove('is-active');
+                        overlay.style.display = 'none'; // Force hide on back navigation
+                    }
+                }
+            };
+</script>
     </form>
 </body>
 </html>
