@@ -167,13 +167,14 @@ namespace FruitUnitedMobile.Modules
                                          r["IsOutstanding"] != DBNull.Value &&
                                          !Convert.ToBoolean(r["IsOutstanding"]); // FIX: invert logic
 
+                    if (finalChargeableQty.ContainsKey(productId))
+                    {
+                        finalChargeableQty[productId] -= returnQty;
+                        if (finalChargeableQty[productId] < 0) finalChargeableQty[productId] = 0;
+                    }
+
                     if (isOutstanding)
                     {
-                        if (finalChargeableQty.ContainsKey(productId))
-                        {
-                            finalChargeableQty[productId] -= returnQty;
-                            if (finalChargeableQty[productId] < 0) finalChargeableQty[productId] = 0;
-                        }
                         OutstandingItemsHtml += $"<tr><td>{abbr}</td><td>{returnQty}</td><td>{uom}</td><td>{reason}</td></tr>";
                     }
                     else
@@ -381,41 +382,64 @@ namespace FruitUnitedMobile.Modules
                             con, trans);
 
                         // 5. Recompute final chargeable quantities
+                        //var finalChargeableQty = new Dictionary<int, decimal>();
+                        //foreach (DataRow row in deliveryDT.Rows)
+                        //{
+                        //    int productId = Convert.ToInt32(row["Product_Profile_ID"]);
+                        //    decimal qty = Convert.ToDecimal(row["Quantity"]);
+                        //    finalChargeableQty[productId] = qty;
+                        //}
+
                         var finalChargeableQty = new Dictionary<int, decimal>();
                         foreach (DataRow row in deliveryDT.Rows)
                         {
                             int productId = Convert.ToInt32(row["Product_Profile_ID"]);
-                            decimal qty = Convert.ToDecimal(row["Quantity"]);
-                            finalChargeableQty[productId] = qty;
+                            finalChargeableQty[productId] = Convert.ToDecimal(row["Quantity"]);
                         }
 
                         if (returnDT != null)
                         {
                             foreach (DataRow r in returnDT.Rows)
                             {
-                                bool isOutstanding = r.Table.Columns.Contains("IsOutstanding") &&
-                                            r["IsOutstanding"] != DBNull.Value &&
-                                            !Convert.ToBoolean(r["IsOutstanding"]); // FIX
+                                int productId = Convert.ToInt32(r["Product_Profile_ID"]);
+                                decimal returnQty = Convert.ToDecimal(r["Return_Quantity"]);
 
-                                if (isOutstanding)
+                                // Subtract from the chargeable bucket before we do any DB inserts
+                                if (finalChargeableQty.ContainsKey(productId))
                                 {
-                                    int productId = Convert.ToInt32(r["Product_Profile_ID"]);
-                                    decimal returnQty = Convert.ToDecimal(r["Return_Quantity"]);
-                                    if (finalChargeableQty.ContainsKey(productId))
-                                    {
-                                        finalChargeableQty[productId] -= returnQty;
-                                        if (finalChargeableQty[productId] < 0) finalChargeableQty[productId] = 0;
-                                    }
+                                    finalChargeableQty[productId] -= returnQty;
+                                    if (finalChargeableQty[productId] < 0) finalChargeableQty[productId] = 0;
                                 }
                             }
                         }
+
+                        //if (returnDT != null)
+                        //{
+                        //    foreach (DataRow r in returnDT.Rows)
+                        //    {
+                        //        bool isOutstanding = r.Table.Columns.Contains("IsOutstanding") &&
+                        //                    r["IsOutstanding"] != DBNull.Value &&
+                        //                    !Convert.ToBoolean(r["IsOutstanding"]); // FIX
+
+                        //        if (isOutstanding)
+                        //        {
+                        //            int productId = Convert.ToInt32(r["Product_Profile_ID"]);
+                        //            decimal returnQty = Convert.ToDecimal(r["Return_Quantity"]);
+                        //            if (finalChargeableQty.ContainsKey(productId))
+                        //            {
+                        //                finalChargeableQty[productId] -= returnQty;
+                        //                if (finalChargeableQty[productId] < 0) finalChargeableQty[productId] = 0;
+                        //            }
+                        //        }
+                        //    }
+                        //}
 
                         // 6. Insert chargeable items
                         foreach (var kv in finalChargeableQty)
                         {
                             int productId = kv.Key;
                             decimal qty = kv.Value;
-                            if (qty <= 0) continue;
+                            if (qty <= 0) continue; // If fully exchanged, don't insert a chargeable record
 
                             decimal price = GetCurrentSellingPrice(productId, outletId);
                             decimal total = qty * price;
@@ -423,10 +447,26 @@ namespace FruitUnitedMobile.Modules
                             InvoiceIssue.InsertIntoLoadingMovement(
                                 InvoiceIssue.InsertInvoiceItem(con, trans,
                                     invoiceId, productId, qty, price, total,
-                                    "Chargeable", "Completed", 0,
-                                    null, null, null, null),
+                                    "Chargeable", "Completed", 0, null, null, null, null),
                                 userId, con, trans);
                         }
+
+                        //foreach (var kv in finalChargeableQty)
+                        //{
+                        //    int productId = kv.Key;
+                        //    decimal qty = kv.Value;
+                        //    if (qty <= 0) continue;
+
+                        //    decimal price = GetCurrentSellingPrice(productId, outletId);
+                        //    decimal total = qty * price;
+
+                        //    InvoiceIssue.InsertIntoLoadingMovement(
+                        //        InvoiceIssue.InsertInvoiceItem(con, trans,
+                        //            invoiceId, productId, qty, price, total,
+                        //            "Chargeable", "Completed", 0,
+                        //            null, null, null, null),
+                        //        userId, con, trans);
+                        //}
 
                         // 7. Insert exchange & outstanding items
                         if (returnDT != null && returnDT.Rows.Count > 0)
